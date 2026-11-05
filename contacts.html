@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact details for Otieno Peter">
+    <title>Contacts | Otieno Peter</title>
+    <link rel="stylesheet" href="cc.css">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="navigation" aria-label="Main navigation">
+            <a class="brand" href="cc.html">Otieno Peter</a>
+            <ul class="navigation-links">
+                <li><a href="cc.html">Home</a></li>
+                <li><a href="experience.html">Personal Experience</a></li>
+                <li><a href="contacts.html" aria-current="page">Contacts</a></li>
+                <li><a href="hobbies.html">Hobbies</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="section" aria-labelledby="contacts-title">
+            <p class="eyebrow">Contact information</p>
+            <h1 id="contacts-title">Contacts</h1>
+            <ul class="contact-list">
+                <li><strong>Email:</strong> <a href="mailto:otienopeter478@gmail.com?subject=Hello%20Otieno%20Peter">otienopeter478@gmail.com</a></li>
+                <li><strong>Phone:</strong> <a href="tel:+254768135792">+254 768 135 792</a></li>
+                <li><strong>Location:</strong> kisii town, kisii</li>
+            </ul>
+
+            <hr class="contact-divider">
+
+            <h2 id="message-title">Send a message</h2>
+            <p class="form-intro">Have a question or want to get in touch? Fill in the form below.</p>
+            <form class="contact-form" id="contact-form" aria-labelledby="message-title">
+                <div class="form-field">
+                    <label for="sender-name">Name</label>
+                    <input id="sender-name" name="name" type="text" autocomplete="name" placeholder="Your name" required>
+                </div>
+                <div class="form-field">
+                    <label for="sender-email">Email</label>
+                    <input id="sender-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+                </div>
+                <div class="form-field">
+                    <label for="message-subject">Subject</label>
+                    <input id="message-subject" name="subject" type="text" placeholder="What is this about?" required>
+                </div>
+                <div class="form-field">
+                    <label for="message-body">Enter message</label>
+                    <textarea id="message-body" name="message" rows="6" placeholder="Write your message here..." required></textarea>
+                </div>
+                <label class="copy-option" for="email-copy">
+                    <input id="email-copy" name="emailCopy" type="checkbox">
+                    Email a copy of this message to your own address
+                </label>
+                <button class="send-button" type="submit">Send message <span aria-hidden="true">→</span></button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>© 2026 princeotieno</p>
+    </footer>
+    <script>
+        document.getElementById("contact-form").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const form = event.currentTarget;
+            const formData = new FormData(form);
+            const email = formData.get("email");
+            const subject = formData.get("subject");
+            const body = [
+                `Name: ${formData.get("name")}`,
+                `Email: ${email}`,
+                "",
+                formData.get("message")
+            ].join("\n");
+            const parameters = new URLSearchParams({ subject, body });
+
+            if (formData.has("emailCopy")) {
+                parameters.set("cc", email);
+            }
+
+            window.location.href = `mailto:otienopeter478@gmail.com?${parameters.toString()}`;
+        });
+    </script>
+</body>
+</html>
